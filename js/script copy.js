@@ -1,18 +1,16 @@
 'use strict';
-
 window.addEventListener('DOMContentLoaded', () => {
   const tabsParent = document.querySelector('.tabheader__items'),
     tabs = tabsParent.querySelectorAll('.tabheader__item'),
     tabsContent = document.querySelectorAll('.tabcontent');
 
   function hideTabContent() {
-    tabsContent.forEach((elem) => {
-      elem.classList.add('hide');
-      elem.classList.remove('show', 'fade');
+    tabsContent.forEach((item) => {
+      item.classList.add('hide');
+      item.classList.remove('show', 'fade');
     });
-
-    tabs.forEach((elem) => {
-      elem.classList.remove('tabheader__item_active');
+    tabs.forEach((item) => {
+      item.classList.remove('tabheader__item_active');
     });
   }
 
@@ -25,7 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
   hideTabContent();
   showTabContent();
 
-  tabsParent.addEventListener('cklick', (event) => {
+  tabsParent.addEventListener('click', (event) => {
     const target = event.target;
 
     if (target && target.matches('.tabheader__item')) {
