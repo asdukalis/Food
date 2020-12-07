@@ -232,6 +232,8 @@ window.addEventListener('DOMContentLoaded', () => {
       const statusMessage = document.createElement('img');
       // statusMessage.classList.add('status');
       statusMessage.src = message.loading;
+      // statusMessage.alt = 'spinner';
+      console.log(statusMessage);
       statusMessage.style.cssText = `
         display: block;
         margin: 0 auto;
@@ -240,37 +242,33 @@ window.addEventListener('DOMContentLoaded', () => {
       // form.append(statusMessage);
       form.insertAdjacentElement('afterend', statusMessage);
 
+      const request = new XMLHttpRequest();
+      request.open('POST', 'server.php');
+
+      // request.setRequestHeader('Content-type', 'multipart/form-data');
+      request.setRequestHeader('Content-type', 'application/json');
       const formData = new FormData(form);
 
-      // const object = {};
-      // formData.forEach((value, key) => {
-      //   object[key] = value;
-      // });
-      // console.log(object);
-      // const json = JSON.stringify(object);
+      const object = {};
+      formData.forEach((value, key) => {
+        object[key] = value;
+      });
+      console.log(object);
+      const json = JSON.stringify(object);
       // request.send(formData);
-      // request.send(json);
-      fetch('server.php', {
-        method: 'POST',
-        // headers: {
-        //   'Content-type': 'application/json',
-        // },
-        body: FormData,
-      })
-        .then(function (data) {
-          return data.text();
-        })
-        .then((data) => {
-          console.dir(data);
+      request.send(json);
+
+      request.addEventListener('load', () => {
+        if (request.status === 200) {
+          console.log(request.response);
+          // statusMessage.textContent = message.success;
           showThanksModal(message.success);
-          statusMessage.remove();
-        })
-        .catch(() => {
-          showThanksModal(message.failure);
-        })
-        .finally(() => {
           form.reset();
-        });
+          statusMessage.remove();
+        } else {
+          showThanksModal(message.failure);
+        }
+      });
     });
   }
 
@@ -296,5 +294,6 @@ window.addEventListener('DOMContentLoaded', () => {
       closeModal();
     }, 4000);
   }
+
   //Forms END
 });
