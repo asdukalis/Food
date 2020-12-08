@@ -235,31 +235,25 @@ window.addEventListener('DOMContentLoaded', () => {
       statusMessage.style.cssText = `
         display: block;
         margin: 0 auto;
-        alt: 
       `;
       // form.append(statusMessage);
       form.insertAdjacentElement('afterend', statusMessage);
 
       const formData = new FormData(form);
 
-      // const object = {};
-      // formData.forEach((value, key) => {
-      //   object[key] = value;
-      // });
-      // console.log(object);
-      // const json = JSON.stringify(object);
-      // request.send(formData);
-      // request.send(json);
+      const object = {};
+      formData.forEach(function (value, key) {
+        object[key] = value;
+      });
+
       fetch('server.php', {
         method: 'POST',
-        // headers: {
-        //   'Content-type': 'application/json',
-        // },
-        body: FormData,
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(object),
       })
-        .then(function (data) {
-          return data.text();
-        })
+        .then((data) => data.text())
         .then((data) => {
           console.dir(data);
           showThanksModal(message.success);
