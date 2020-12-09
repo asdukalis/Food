@@ -191,8 +191,10 @@ window.addEventListener('DOMContentLoaded', () => {
     return res.json();
   };
 
-  getResource('http://localhost:3000/menu').then((data) => {
-    data.forEach(({ img, altimg, title, descr, price }) => {
+  // создания динамических карточек с помощью axios
+
+  axios.get('http://localhost:3000/menu').then((data) => {
+    data.data.forEach(({ img, altimg, title, descr, price }) => {
       new MenuCard(
         img,
         altimg,
@@ -203,6 +205,21 @@ window.addEventListener('DOMContentLoaded', () => {
       ).render();
     });
   });
+
+  // перывй вариант создания динамических карточек
+
+  // getResource('http://localhost:3000/menu').then((data) => {
+  //   data.forEach(({ img, altimg, title, descr, price }) => {
+  //     new MenuCard(
+  //       img,
+  //       altimg,
+  //       title,
+  //       descr,
+  //       price,
+  //       '.menu .container'
+  //     ).render();
+  //   });
+  // });
 
   // второй вариант создания динамических карточек
 
