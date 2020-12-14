@@ -124,5 +124,5 @@ function calc() {
   // Calc end
 }
 
-module.exports = calc;
-// export default calc;
+// module.exports = calc;
+export default calc;

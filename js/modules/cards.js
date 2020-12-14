@@ -1,3 +1,5 @@
+import { getResource } from '../services/services';
+
 function cards() {
   // card START Используем классы для карточек
   class MenuCard {
@@ -40,35 +42,20 @@ function cards() {
     }
   }
 
-  const getResource = async (url) => {
-    const res = await fetch(url);
+  // const getResource = async (url) => {
+  //   const res = await fetch(url);
 
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${url}, staus: ${res.staus}`);
-    }
+  //   if (!res.ok) {
+  //     throw new Error(`Could not fetch ${url}, staus: ${res.staus}`);
+  //   }
 
-    return res.json();
-  };
+  //   return res.json();
+  // };
 
   // создания динамических карточек с помощью axios
 
-  axios.get('http://localhost:3000/menu').then((data) => {
-    data.data.forEach(({ img, altimg, title, descr, price }) => {
-      new MenuCard(
-        img,
-        altimg,
-        title,
-        descr,
-        price,
-        '.menu .container'
-      ).render();
-    });
-  });
-
-  // перывй вариант создания динамических карточек
-
-  // getResource('http://localhost:3000/menu').then((data) => {
-  //   data.forEach(({ img, altimg, title, descr, price }) => {
+  // axios.get('http://localhost:3000/menu').then((data) => {
+  //   data.data.forEach(({ img, altimg, title, descr, price }) => {
   //     new MenuCard(
   //       img,
   //       altimg,
@@ -79,6 +66,21 @@ function cards() {
   //     ).render();
   //   });
   // });
+
+  // перывй вариант создания динамических карточек
+
+  getResource('http://localhost:3000/menu').then((data) => {
+    data.forEach(({ img, altimg, title, descr, price }) => {
+      new MenuCard(
+        img,
+        altimg,
+        title,
+        descr,
+        price,
+        '.menu .container'
+      ).render();
+    });
+  });
 
   // второй вариант создания динамических карточек
 
@@ -110,5 +112,5 @@ function cards() {
   // card END
 }
 
-module.exports = cards;
-// export default cards;
+// module.exports = cards;
+export default cards;

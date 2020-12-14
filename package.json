@@ -1,7 +1,7 @@
 {
   "name": "food",
   "version": "1.0.0",
-  "description": "",
+  "description": "my best food project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/asdukalis/Food#readme",
   "devDependencies": {
-    "json-server": "^0.16.3"
+    "json-server": "^0.16.3",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "webpack": "^5.10.1"
   }
 }
