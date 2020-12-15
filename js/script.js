@@ -1,4 +1,6 @@
-'use strict';
+require('es6-promise').polyfill();
+import 'nodelist-foreach-polyfill';
+
 import calc from './modules/calc';
 import tabs from './modules/tabs';
 import timer from './modules/timer';
@@ -15,12 +17,12 @@ window.addEventListener('DOMContentLoaded', () => {
   );
   const deadline = '2020-12-31';
 
-  tabs(
-    '.tabheader__item',
-    '.tabcontent',
-    '.tabheader__items',
-    'tabheader__item_active'
-  );
+  tabs({
+    tabsSelector: '.tabheader__item',
+    tabsContentSelector: '.tabcontent',
+    tabsParentSelector: '.tabheader__items',
+    activeClass: '.tabheader__item_active',
+  });
   timer('.timer', deadline);
   modal('[data-modal]', '.modal', modalTimerId);
   forms('form', modalTimerId);
